@@ -2,6 +2,7 @@ package Executavel;
 
 import Classes.*;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,11 +28,11 @@ public class Main {
 
     private static void menu() {
 
-        System.out.println("1-cadastroCliente\n2-cadastroServiço\n3-listarrServicos\n4-removerServicos\n5-alterarServicos\n6-removerClientes\n7-listarClientes\n8-alterarClientes\n9-registroServicos\n10-Sair");
+        int operacao =
+        Integer.parseInt(JOptionPane.showInputDialog( "1- Cadastrar Cliente \n2- Cadastrar Serviço \n3- Listar Serviços \n4- Remover Serviço\n5- Alterar Serviço \n6- Remover Cliente \n7- Listar Clientes \n8- Alterar Cliente \n9- Registro de Servicos\n10- Sair do programa"));
 
-        int opcao = Entrada.nextInt();
 
-        switch (opcao) {
+        switch (operacao) {
             case 1:
                 cadastroCliente();
 
@@ -64,49 +65,44 @@ public class Main {
         }
     }
     private static void cadastroServicos() {
-        System.out.println("nome do serviço: ");
-        String nomeServico = Entrada.next();
-        System.out.println("Nome do CLasses.Funcionario que faz o serviço: ");
-        String funcionario = Entrada.next();
-        System.out.println("data que o serviço foi feito: ");
-        String dataString = Entrada.next();
+        String nomeServico = JOptionPane.showInputDialog("Nome do serviço: ");
+        String funcionario = JOptionPane.showInputDialog("Nome do Funcionario que faz o serviço: ");
+        String dataString = JOptionPane.showInputDialog("Data em que o serviço foi feito: ");
         String[] dataseparada = dataString.split("/");
         LocalDate datanascimento = LocalDate.of(Integer.parseInt(dataseparada[2]), Integer.parseInt(dataseparada[1]), Integer.parseInt(dataseparada[0]));
-        System.out.println("valor do serviço: ");
-        double valor = Entrada.nextDouble();
-        System.out.println("Descriçao do serviço: ");
-        String descricao = Entrada.next();
+        double valor = Double.parseDouble(JOptionPane.showInputDialog("Valor do serviço: "));
+        String descricao = JOptionPane.showInputDialog("Descriçao do serviço: ");
         Funcionario Funcionarioo = new Funcionario(funcionario);
         Servico servico = new Servico(nomeServico, descricao, valor,Funcionarioo,datanascimento);
         servicos.add(servico);
         servico.Adiciconaa(servico);
-        System.out.println("Serviço cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso");
         menu();
     }
 
     private static void cadastroCliente() {
-        System.out.println("nome do cliente: ");
-        String nome = Entrada.next();
-        System.out.println("email do cliente: ");
-        String email = Entrada.next();
-        System.out.println("sexo do cliente: ");
-        String sexo = Entrada.next();
-        System.out.println("uf do cliente: ");
-        String uf = Entrada.next();
-        System.out.println("cidade do cliente: ");
-        String cidade = Entrada.next();
-        System.out.println("Bairro do cliente: ");
-        String bairro = Entrada.next();
-        System.out.println("rua do cliente: ");
-        String rua = Entrada.next();
-        System.out.println("numero da casa do cliente: ");
-        int numero = Entrada.nextInt();
+        String nome =
+        JOptionPane.showInputDialog("Nome do cliente: ");
+        String email =
+                JOptionPane.showInputDialog("Email do cliente: ");
+        String sexo =
+                JOptionPane.showInputDialog("Sexo do cliente: ");
+        String uf =
+                JOptionPane.showInputDialog("Uf do cliente: ");
+        String cidade =
+                JOptionPane.showInputDialog("Cidade do cliente: ");
+        String bairro =
+                JOptionPane.showInputDialog("Bairro do cliente: ");
+        String rua =
+                JOptionPane.showInputDialog("Rua do cliente: ");
+        int numero =
+                Integer.parseInt(JOptionPane.showInputDialog("Número da casa do cliente: "));
         Endereco endereco = new Endereco(numero, bairro, cidade, rua, uf);
         Cliente clientee = new Cliente(nome,email,sexo,endereco);
         clientes.add(clientee);
         clientee.Adiciconaa(clientee);
 
-        System.out.println("CLasses.Cliente cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso.");
         menu();
     }
 
@@ -115,10 +111,10 @@ public class Main {
     private static void listarServicos() {
         if (servicos.size() > 0) {
             for (Servico servico : servicos) {
-                System.out.println(servico.print());
+                JOptionPane.showMessageDialog(null, servico.print());
             }
         } else {
-            System.out.println("nao ha serviços para listar");
+            JOptionPane.showMessageDialog(null, "Não há serviços para listar.");
         }
         menu();
 
@@ -151,8 +147,8 @@ public class Main {
     }
 
     public static void removerServico() {
-        System.out.println(" Digite o codigo para ser encontrado:  ");
-        int codigo = Entrada.nextInt();
+        int codigo =
+                Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do serviço que você deseja remover:  "));
         Servico servico = encontraServicos(codigo);
         if (servico != null) {
             servico.remover(servico, codigo);
@@ -163,19 +159,19 @@ public class Main {
 
     public static void alterarServicos() {
 
+        int codigo =
+                Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do serviço que você deseja alterar:  "));
 
-        System.out.println(" Digite o codigo do serviço para ser alterado :  ");
-        int codigo = Entrada.nextInt();
         Servico servico = encontraServicos(codigo);
         if (servico != null) {
-            System.out.println(" digite o novo nome do serviço:  ");
-            String nomee = Entrada.next();
-            System.out.println(" digite a novo nome do funcionario para ser alterado:  ");
-            String nomefuncionario = Entrada.next();
-            System.out.println(" digite o novo valor do servico que deseja alterar:  ");
-            double novovalor = Entrada.nextDouble();
-            System.out.println(" digite a nova descricao do servico que deseja alterar:  ");
-            String descricao = Entrada.next();
+            String nomee =
+                    JOptionPane.showInputDialog("Digite o novo nome do serviço você está alterando:  ");
+            String nomefuncionario =
+                    JOptionPane.showInputDialog("Digite a novo nome do funcionario que você está alterando:  ");
+            double novovalor =
+                    Double.parseDouble(JOptionPane.showInputDialog("Digite o novo valor do servico que você está alterando:  "));
+            String descricao =
+                    JOptionPane.showInputDialog("Digite a nova descricao do servico que deseja alterar:  ");
             servico.alterar(servico, codigo, nomee, novovalor, descricao, nomefuncionario);
 
 
@@ -185,8 +181,8 @@ public class Main {
     }
 
     private static void removerClientes() {
-        System.out.println("codigo do cliente: ");
-        int codigo = Entrada.nextInt();
+        int codigo =
+                Integer.parseInt(JOptionPane.showInputDialog("Código do cliente que você deseja remover: "));
         Cliente cliente = encontrarClientes(codigo);
         if (cliente != null) {
             cliente.removerClientes(cliente, codigo);
@@ -197,31 +193,32 @@ public class Main {
     }
 
     private static void alterarClientes() {
-        System.out.println("Digite o codigo do cliente que deseja alterar");
-        int codigo = Entrada.nextInt();
+        int codigo =
+                Integer.parseInt(JOptionPane.showInputDialog("Digite o código do cliente que você deseja alterar: "));
         Cliente cliente = encontrarClientes(codigo);
         if (cliente != null) {
-            System.out.println("Digite o novo nome para ser alterado: ");
-            String nomeee = Entrada.next();
-            System.out.println("Digite o novo email para ser alterado: ");
-            String email = Entrada.next();
-            System.out.println("sexo do cliente para ser alterado : ");
-            String sexoo = Entrada.next();
-            System.out.println("Digite o novo uf do cliente para ser alterado: ");
-            String uf = Entrada.next();
-            System.out.println("Digite a nova cidade do cliente para ser alterada: ");
-            String cidade = Entrada.next();
-            System.out.println("Digite o novo Bairro do cliente para ser alterado: ");
-            String bairro = Entrada.next();
-            System.out.println("Digite a nova rua do rua do cliente para ser alterado: ");
-            String rua = Entrada.next();
-            System.out.println("Digite o novo numero da casa do cliente para ser alterado: ");
-            int numero = Entrada.nextInt();
-            System.out.println("Digite o novo logradourodo cliente para ser alterado: ");
-            String logradouro = Entrada.next();
+
+            String nomeee =
+                    JOptionPane.showInputDialog("Digite o novo nome que você está alterando: ");
+            String email =
+                    JOptionPane.showInputDialog("Digite o novo email que você está alterando: ");
+            String sexoo =
+                    JOptionPane.showInputDialog("Digite o sexo do cliente que você está alterando : ");
+            String uf =
+                    JOptionPane.showInputDialog("Digite o novo Uf do cliente que você está alterando: ");
+            String cidade =
+                    JOptionPane.showInputDialog("Digite a nova Cidade do cliente que você está alterando: ");
+            String bairro =
+                    JOptionPane.showInputDialog("Digite o novo Bairro do cliente que você está alterando: ");
+            String rua =
+                    JOptionPane.showInputDialog("Digite a nova Rua do cliente que você está alterando: ");
+            int numero =
+                    Integer.parseInt(JOptionPane.showInputDialog("Digite o novo numero da casa do cliente que você está alterando: "));
+            String logradouro =
+                    JOptionPane.showInputDialog("Digite o novo logradourodo cliente que você está alterando: ");
             cliente.alterarClientes(cliente, codigo, nomeee, email, sexoo, numero, bairro, cidade, uf, logradouro, rua);
         } else {
-            System.out.println("Não foi possivel fazer a alteração");
+            JOptionPane.showMessageDialog(null, "Não foi possivel fazer a alteração");
         }
         menu();
     }
@@ -229,10 +226,10 @@ public class Main {
     private static void listarClientes() {
         if (clientes.size() > 0) {
             for (Cliente cliente : clientes) {
-                System.out.println(cliente.print());
+                JOptionPane.showMessageDialog(null, cliente.print());
             }
         } else {
-            System.out.println("Não há serviços para listar");
+            JOptionPane.showMessageDialog(null, "Não há clientes para listar");
         }
         menu();
 
@@ -242,15 +239,14 @@ public class Main {
 
 private static void registroServicos(){
 
-        System.out.println("Registro De Serviços");
     if(registroServicos.size() > 0){
             for(RegistroServico registroServico: registroServicos)
-                System.out.println(registroServico);
+                JOptionPane.showMessageDialog(null, registroServico);
         }
         menu();
     }
     private static void sair(){
-        System.out.println("Saída executada !");
+        JOptionPane.showMessageDialog(null, "OK. Obrigado por usar nossa plataforma.");
         System.exit(1);
     }
     }

@@ -2,6 +2,7 @@ package Classes;
 
 import Executavel.Main;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 import static Executavel.Main.*;
@@ -37,9 +38,9 @@ public class Servico extends RegistroServico {
     public void remover(Servico servico, int codigo) {
         if (servico.getCodigo() == codigo) {
             servicos.remove(servico);
-            System.out.println(" CLasses.Servico removido com sucesso");
+                JOptionPane.showMessageDialog(null, "Serviço removido.");
         } else {
-            System.out.println(" Não foi possivel remover serviço");
+            JOptionPane.showMessageDialog(null, " Não foi possivel remover serviço.");
         }
     }
 
@@ -54,9 +55,9 @@ public class Servico extends RegistroServico {
             servico.setNome(nome);
             servico.funcionario.setNome(nomefuncionario);
 
-            System.out.println(" Serviço alterado com sucesso");
+            JOptionPane.showMessageDialog(null," Serviço alterado com sucesso.");
         } else {
-            System.out.println("Nao foi possivel fazer a alteração");
+            JOptionPane.showMessageDialog(null,"Nao foi possivel fazer a alteração");
         }
     }
 
@@ -109,17 +110,19 @@ public class Servico extends RegistroServico {
         registroServicos.add(servico);
     }
     public String print(){
-        return "Codigo:"+getCodigo() + "\n" +
-                "Serviço:" +getNome()+"\n" +
-                "Descriçao : " +getDescricao() + "\n" +
-                "Valor: " +getValor() + "\n" +
-                "CLasses.Funcionario" +getFuncionario().getNome();
+        return "Código: " +getCodigo() + " \n " +
+                "Serviço: " +getNome()+ " \n " +
+                "Descriçao: " + getDescricao() + " \n " +
+                "Valor: " + getValor() + " \n " +
+                "Funcionário: " + getFuncionario().getNome();
 
     }
 
     public String toString() {
-        return  "CLasses.Servico " +getNome() + "\n" +
-                "DataServico" +getData() + "" +
-                "CLasses.Funcionario " +getFuncionario().getNome() ;
+        return
+                "Serviço: " +getNome() + "\n" +
+                "Valor: " + getValor() + "\n" +
+                "Data do Servico: " +getData() + "\n" +
+                "Funcionário: " +getFuncionario().getNome() ;
     }
 }

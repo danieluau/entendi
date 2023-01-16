@@ -1,5 +1,7 @@
 package Classes;
 
+import javax.swing.*;
+
 import static Executavel.Main.clientes;
 import static Executavel.Main.registroServicos;
 
@@ -56,10 +58,10 @@ public class Cliente extends RegistroServico {
     public void removerClientes(Cliente cliente, int codigo){
     if(cliente.getCodigo() == codigo){
         clientes.remove(cliente);
-        System.out.println(" CLasses.Cliente removido com sucesso");
+        JOptionPane.showMessageDialog(null, "Cliente removido");
     }
    else {
-        System.out.println(" Não foi possivel remover o cliente");
+        JOptionPane.showMessageDialog(null, "Não foi possível remover cliente.");
     }
     }
    public void alterarClientes(Cliente cliente, int codigo, String nome, String email, String sexo, int numero, String bairro, String cidade, String uf, String logradouro, String rua){
@@ -73,7 +75,7 @@ public class Cliente extends RegistroServico {
             cliente.setEnderecoUf(uf);
             cliente.setEnderecoLogradouro(logradouro);
             cliente.setEnderecoRua(rua);
-            System.out.println("Serviço alterado com sucesso");
+            JOptionPane.showMessageDialog(null, "Serviço atualizado");
         }
    }
     public void setEndereco(Endereco endereco) {
@@ -106,16 +108,17 @@ public class Cliente extends RegistroServico {
 
 
     public String print(){
-    return  "codigo:"+getCodigo() + "\n" +
-            "Email:" +getEmail() +"\n" +
-            "Sexo : " +getSexo() + "\n" +
-            "CLasses.Endereco: " + getEndereco().getBairro() + "," +getEndereco().getNumero() + "," + getEndereco().getRua() +"," +getEndereco().getCidade() + "," +getEndereco().getUf();
+    return  "Código: "+getCodigo() + "\n" +
+            "Nome: " + getNome() + "\n" +
+            "Email: " +getEmail() +"\n" +
+            "Sexo: " +getSexo() + "\n" +
+            "Endereço: " + getEndereco().getRua() + getEndereco().getBairro() + +getEndereco().getNumero() + ", " + getEndereco().getCidade() + ", " +  ", " +getEndereco().getUf();
 }
 
     public void Adiciconaa(Cliente cliente){
         registroServicos.add(cliente);}
 
     public String toString() {
-        return " CLasses.Cliente " +getNome();
+        return "Cliente: " +getNome();
     }
 }
